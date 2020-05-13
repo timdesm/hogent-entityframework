@@ -27,7 +27,7 @@ namespace FootballConsole.managers
                         TeamManager.ManageTeam();
                         break;
                     case "2":
-                        
+                        PlayerManager.ManagePlayers();
                         break;
                     case "3":
 
