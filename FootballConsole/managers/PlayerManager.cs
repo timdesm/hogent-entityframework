@@ -50,7 +50,7 @@ namespace FootballConsole.managers
         private static void PrintPlayers()
         {
             Program.printHeader();
-            Console.WriteLine("----- [TEAM LIST] -----");
+            Console.WriteLine("----- [PLAYER LIST] -----");
             using (DataContext ctx = new DataContext())
             {
                 foreach (Player player in ctx.Players)
