@@ -172,7 +172,7 @@ namespace FootballConsole.managers
         private static void PrintTransfer(Transfer transfer)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"ID: {transfer.ID}, Player:  {transfer.PlayerID}, Old Team:  {transfer.OldTeamID}, New Team:  {transfer.NewTeamID}");
+            Console.WriteLine($"ID: {transfer.ID}, Player:  {transfer.PlayerID}, Old Team:  {transfer.OldTeamID}, New Team:  {transfer.NewTeamID}, Price: {transfer.Price}");
             Console.ForegroundColor = ConsoleColor.White;
         }
     }
