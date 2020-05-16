@@ -64,7 +64,7 @@ namespace FootballConsole.managers
         private static void PrintPlayer(Player player)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"ID: {player.ID}, Name: {player.Name}, Number: {player.Number}, Score: {player.TotalScore}, Team: {player.TeamID}");
+            Console.WriteLine($"ID: {player.ID}, Name: {player.Name}, Number: {player.Number}, Score: {player.TotalScore}, Team: {player.TeamID}, Value: {player.Value}");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
@@ -74,6 +74,7 @@ namespace FootballConsole.managers
             int playerNumber;
             Double playerScore;
             Team playerTeam;
+            int playerValue;
 
             while (true)
             {
@@ -147,10 +148,24 @@ namespace FootballConsole.managers
                 }
             }
 
+            while (true)
+            {
+                Program.printHeader();
+                Console.WriteLine("----- [ADD PLAYER] -----");
+                Console.Write("Player Value?: ");
+                String payerValueStr = Console.ReadLine();
+                if (Int32.TryParse(payerValueStr, out playerValue))
+                    break;
+                else
+                {
+                    Console.Write("You must fill in a valid player value, press ENTER to continue...");
+                    Console.ReadLine();
+                }
+            }
+
             using (DataContext ctx = new DataContext())
             {
-                int ID = ctx.Players.OrderBy(x => x.ID).Last().ID + 1;
-                Player p = new Player(ID, playerNumber, playerName, playerScore, playerTeam);
+                Player p = new Player(0, playerNumber, playerName, playerScore, playerTeam, playerValue);
                 ctx.Players.Add(p);
                 ctx.SaveChanges();
             }
@@ -317,6 +332,9 @@ namespace FootballConsole.managers
                         {
                             ctx.Players.Remove(ctx.Players.Where(x => x.ID == playerID).First());
                             ctx.SaveChanges();
+
+                            Console.Write("Player has been deleted, press ENTER to continue...");
+                            Console.ReadLine();
                             break;
                         }
                         else

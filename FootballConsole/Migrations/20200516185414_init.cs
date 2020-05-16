@@ -29,7 +29,8 @@ namespace FootballConsole.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Price = table.Column<double>(nullable: false),
                     OldTeamID = table.Column<int>(nullable: false),
-                    NewTeamID = table.Column<int>(nullable: false)
+                    NewTeamID = table.Column<int>(nullable: false),
+                    PlayerID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,7 +46,8 @@ namespace FootballConsole.Migrations
                     Number = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     TotalScore = table.Column<double>(nullable: false),
-                    TeamID = table.Column<int>(nullable: false)
+                    TeamID = table.Column<int>(nullable: false),
+                    Value = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

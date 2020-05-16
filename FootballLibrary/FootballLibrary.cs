@@ -74,7 +74,7 @@ namespace FootballLibrary
 
     public class Player
     {
-        public Player(int ID, int Number, String Name, double TotalScore, int teamID)
+        public Player(int ID, int Number, String Name, double TotalScore, int teamID, int value)
         {
             this.ID = ID;
             this.Number = Number;
@@ -82,9 +82,10 @@ namespace FootballLibrary
             this.TotalScore = TotalScore;
             this.Team = null;
             this.TeamID = teamID;
+            this.Value = value;
         }
 
-        public Player(int ID, int Number, String Name, double TotalScore, Team team)
+        public Player(int ID, int Number, String Name, double TotalScore, Team team, int value)
         {
             this.ID = ID;
             this.Number = Number;
@@ -92,6 +93,7 @@ namespace FootballLibrary
             this.TotalScore = TotalScore;
             this.Team = team;
             this.TeamID = team.ID;
+            this.Value = value;
         }
 
         [Key]
@@ -100,6 +102,7 @@ namespace FootballLibrary
         public String Name { get; set; }
         public Double TotalScore { get; set; }
         public int TeamID { get; set; }
+        public int Value { get; set; }
 
         [NotMapped]
         public Team Team { get; set; }
@@ -131,18 +134,21 @@ namespace FootballLibrary
 
     public class Transfer
     {
-        public Transfer(int ID, Double price, int oldTeamID, int newTeamID)
+        public Transfer(int ID, Double price, int playerID, int oldTeamID, int newTeamID)
         {
             this.ID = ID;
             this.Price = price;
+            this.PlayerID = playerID;
             this.OldTeamID = oldTeamID;
             this.NewTeamID = newTeamID;
         }
 
-        public Transfer(int ID, double price, Team oldTeam, Team newTeam)
+        public Transfer(int ID, double price, Player player, Team oldTeam, Team newTeam)
         {
             this.ID = ID;
             this.Price = price;
+            this.Player = player;
+            this.PlayerID = player.ID;
             this.OldTeam = oldTeam;
             this.OldTeamID = oldTeam.ID;
             this.NewTeam = newTeam;
@@ -154,8 +160,10 @@ namespace FootballLibrary
         public Double Price { get; set; }
         public int OldTeamID { get; set; }
         public int NewTeamID { get; set; }
+        public int PlayerID { get; set; }
 
-
+        [NotMapped]
+        public Player Player { get; set; }
         [NotMapped]
         public Team OldTeam { get; set; }
         [NotMapped]

@@ -78,7 +78,7 @@ namespace FootballConsole
             if (repo.GetTeams().Find(x => x.ID.Equals(Int16.Parse(temp[4]))) == null)
                 repo.AddTeam(new Team(Int16.Parse(temp[4]), temp[2], temp[6], temp[5]));
             Team x = repo.GetTeams().Find(x => x.ID.Equals(Int16.Parse(temp[4])));
-            Player p = new Player(repo.GetPlayers().Count + 1, Int32.Parse(temp[1]), temp[0], random.Next(0, 100), x);
+            Player p = new Player(repo.GetPlayers().Count + 1, Int32.Parse(temp[1]), temp[0], random.Next(0, 100), x, Int32.Parse(temp[3].Replace(" ", "")));
             repo.AddPlayer(p);
         }
 

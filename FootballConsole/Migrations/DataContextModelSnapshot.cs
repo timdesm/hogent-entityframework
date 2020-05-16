@@ -37,6 +37,9 @@ namespace FootballConsole.Migrations
                     b.Property<double>("TotalScore")
                         .HasColumnType("float");
 
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.HasIndex("TeamID");
@@ -76,6 +79,9 @@ namespace FootballConsole.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("OldTeamID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlayerID")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")

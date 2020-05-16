@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballConsole.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200513193852_init")]
+    [Migration("20200516185414_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace FootballConsole.Migrations
 
                     b.Property<double>("TotalScore")
                         .HasColumnType("float");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -78,6 +81,9 @@ namespace FootballConsole.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("OldTeamID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlayerID")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")

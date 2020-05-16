@@ -30,7 +30,7 @@ namespace FootballConsole.managers
                         PlayerManager.ManagePlayers();
                         break;
                     case "3":
-
+                        TransferManager.ManageTransfers();
                         break;
                     case "4":
                         runMenu = false;

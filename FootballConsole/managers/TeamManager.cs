@@ -1,4 +1,5 @@
 ﻿using FootballLibrary;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -24,13 +25,13 @@ namespace FootballConsole.managers
                 switch (selection)
                 {
                     case "1":
-              
+                        AddTeam();
                         break;
                     case "2":
                         UpdateTeam();
                         break;
                     case "3":
-                        
+                        DeleteTeam();
                         break;
                     case "4":
                         PrintTeams();
@@ -65,6 +66,68 @@ namespace FootballConsole.managers
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine($"ID: {team.ID}, Name: {team.Name}, Nickname: {team.NickName}, Trainer: {team.Trainer}");
             Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private static void AddTeam()
+        {
+            String teamName;
+            String teamNickname;
+            String teamTrainer;
+
+            while (true)
+            {
+                Program.printHeader();
+                Console.WriteLine("----- [ADD TEAM] -----");
+                Console.Write("Team name?: ");
+                teamName = Console.ReadLine();
+                if (teamName != "")
+                    break;
+                else
+                {
+                    Console.Write("You must fill in a team name, press ENTER to continue...");
+                    Console.ReadLine();
+                }
+            }
+
+            while (true)
+            {
+                Program.printHeader();
+                Console.WriteLine("----- [ADD TEAM] -----");
+                Console.Write("Team nickname?: ");
+                teamNickname = Console.ReadLine();
+                if (teamNickname != "")
+                    break;
+                else
+                {
+                    Console.Write("You must fill in a team nickname, press ENTER to continue...");
+                    Console.ReadLine();
+                }
+            }
+
+            while (true)
+            {
+                Program.printHeader();
+                Console.WriteLine("----- [ADD TEAM] -----");
+                Console.Write("Team trainer?: ");
+                teamTrainer = Console.ReadLine();
+                if (teamTrainer != "")
+                    break;
+                else
+                {
+                    Console.Write("You must fill in a team trainer, press ENTER to continue...");
+                    Console.ReadLine();
+                }
+            }
+
+            using (DataContext ctx = new DataContext())
+            {
+                Team t = new Team(0, teamName, teamNickname, teamTrainer);
+                ctx.Teams.Add(t);
+                ctx.SaveChanges();
+            }
+
+            Console.Write("New team has been added, press ENTER to continue...");
+            Console.ReadLine();
         }
 
         private static void UpdateTeam()
@@ -211,6 +274,42 @@ namespace FootballConsole.managers
             }
         }
 
+        private static void DeleteTeam()
+        {
+            using (DataContext ctx = new DataContext())
+            {
+                while (true)
+                {
+                    Program.printHeader();
+                    Console.WriteLine("----- [DELETE TEAM] -----");
+                    Console.Write("Team ID?: ");
+                    String selection = Console.ReadLine();
+                    if (Int32.TryParse(selection, out int teamID))
+                    {
+                        if (ctx.Teams.Where(x => x.ID == teamID).Any())
+                        {
+                            ctx.Teams.Remove(ctx.Teams.Where(x => x.ID == teamID).First());
+                            ctx.SaveChanges();
 
+                            Console.Write("Team has been deleted, press ENTER to continue...");
+                            Console.ReadLine();
+                            break;
+                        }
+                        else
+                        {
+                            Console.Write("No team found with that ID, press ENTER to continue...");
+                            Console.ReadLine();
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Console.Write("Input was not a valid number, press ENTER to continue...");
+                        Console.ReadLine();
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
